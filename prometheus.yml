@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 15s # Seberapa sering mengambil data dari target. 15 detik adalah default.
+  evaluation_interval: 15s # Seberapa sering mengevaluasi rules.
+
+# Daftar target yang akan di-scrape oleh Prometheus
+scrape_configs:
+  # Job untuk mengambil metrik dari Cloudflare Exporter
+  - job_name: 'cloudflare'
+
+    # Path default untuk metrik adalah /metrics, tapi kita tuliskan agar lebih jelas
+    metrics_path: /metrics
+
+    # Karena URL Anda menggunakan HTTPS, kita perlu mendefinisikan scheme-nya
+    scheme: https
+
+    # Konfigurasi target statis
+    static_configs:
+      - targets: ['cloudflare-exporter-latest.onrender.com']
